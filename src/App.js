@@ -42,9 +42,15 @@ const [todoToShow,setTodoToShow] = useState("all");
   };
 
 
+// final button
+  const [toggleAllcomplete,setToggleAllcomplete]=useState(true);
 
-
-
+  const removeAllTodosThatAreComplete = () =>{
+    setTodos(
+        todos.filter(todo => !todo.complete)
+    )
+  
+}
 
 //  if condation for three btn
 if (todoToShow === "active") {
@@ -73,8 +79,21 @@ if (todoToShow === "active") {
         <button className='update-btn btn'onClick={()=> updateTodoToShow("active")}>active</button>
         <button className='update-btn btn'onClick={()=> updateTodoToShow("complete")}>complete</button>
      </div>
-     <button>Remove all comblete todos</button>
-     <button>toggle All Complete</button>
+     <button className="all-btn btn" onClick={removeAllTodosThatAreComplete}>Remove all comblete todos</button>
+     <button className="all-btn btn" onClick={()=>{
+                           setTodos(
+                            todos.map((todo)=> ({ 
+                              ...todo,
+                              complete: toggleAllcomplete ,
+                            }))
+                           );
+                           setToggleAllcomplete(!toggleAllcomplete)
+                      }}
+                      
+                      > 
+                              
+                              
+                              toggle All Complete:{`${toggleAllcomplete}`}</button>
 
 
 
